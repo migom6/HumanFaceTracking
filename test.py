@@ -1,12 +1,22 @@
-from detec import FaceDetection
+# from detec import FaceDetection
 import cv2
-
-path1 = '/Users/migom/Desktop/summer/haar/new/face-recognition/images/Vladimir_Putin/Vladimir_Putin_0003.jpg'
-path2 = '/Users/migom/Desktop/1601425_999738940065732_37126818477988456_n.jpg'
+import numpy as np
+path1 = '/Users/migom/Desktop/summer/haar/new/facerecognition/test-images/2.png'
+path2 = '/Users/migom/Desktop/summer/haar/new/facerecognition/test-images/3.jpg'
 img1 = cv2.imread(path1, 1)
 img2 = cv2.imread(path2, 1)
 
 
-myModel = FaceDetection(img1)
-# print(myModel.cv_predict_mat(img2))
-print(myModel.cv_predict(img2))
+from anchor import getAnchor
+raghav = getAnchor('raghav')
+anchor_faces = raghav.getfaces('test-images/')
+
+# myModel = FaceDetection(anchor_faces)
+for idx, i in enumerate(anchor_faces):
+  i = np.array(i)
+  cv2.imwrite('we'+str(idx)+'.png', i)
+# myModel = FaceDetection(img1)
+# # print(myModel.cv_predict_mat(img2))
+# print(myModel.cv_predict(img2))
+
+

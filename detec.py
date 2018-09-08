@@ -10,13 +10,10 @@ class FaceDetection:
         nn4_small2_pretrained.load_weights('weights/nn4.small2.v1.h5')
         self.nn4_small2_pretrained =  nn4_small2_pretrained
         self.alignment = AlignDlib('models/landmarks.dat')
-        anchors = self.import_image_from_path(anchors)
+        anchors = [(img / 255.).astype(np.float32) for img in anchors]
         anchors_embeddings = [self.nn4_small2_pretrained.predict(np.expand_dims(anchor, axis=0))[0] for anchor in anchors]
         self.anchors_embeddings = anchors_embeddings
 
-
-    # def load_image(self, img):
-    #     return img[...,::-1]
 
     def import_image_from_path(self, i):
         # img = self.load_image(path)
@@ -46,27 +43,25 @@ class FaceDetection:
             for jdx, a in enumerate(self.anchors_embeddings):
                 d = self.distance(f, a)
                 if(verbose): print(d , 'face#' + str(idx) +' with anchor#'+str(jdx))
+                if(d < 0.6):
+                    print("Aniket deteced")
+                else:
+                    print(d)
                 k.append(d)
             r.append(k)
         return (faces, r) 
 
     def cv_predict(self, frame, verbose=False):
         faces , m = self.cv_predict_mat(frame, verbose)
+        avg = []
+        for idx, i in enumerate(m):
+            k = np.mean(i)
+            print("avg value face#"+str(idx)+' '+str(k))
         mx = 0
-        mn = 100
-        c = 0
-        s = 0 
-        avg = 0
-        for i in m:
-            for j in i:
-                s = s + j
-                c = c + 1
-                if(j > mx):
-                    mx = j
-                if(j < mn):
-                    mn = j
-        if(c != 0 ): avg = s/c
-        
+        mn = 0
+        if(len(m) > 0 and len(m[0]) > 0):
+            mx = np.max(m)
+            mn = np.min(m)
         return faces,(mx, mn, avg)
 
 
