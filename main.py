@@ -7,7 +7,9 @@ import numpy as np
    
 raghav = getAnchor('raghav')
 anchor_faces = raghav.getfaces('test-images/')
-myModel = FaceDetection(anchor_faces)
+myModel = FaceDetection(anchor_faces, 'raghav')
+
+
 frames = 0
 start = time.time()
 cap = cv2.VideoCapture(0)
@@ -30,8 +32,6 @@ while cap.isOpened():
           break
       frames += 1
       print("FPS of the video is {:5.2f}".format( frames / (time.time() - start)))
-    #   print(result)
-
   else:
       break
 

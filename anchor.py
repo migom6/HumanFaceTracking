@@ -20,12 +20,14 @@ class getAnchor:
     listOfFiles = os.listdir(path)
     crop_faces = []
     for i in listOfFiles:
+        if(i == '.DS_Store'): continue
         i = path + i
         img = cv2.imread(i, 1)
         faces = alignface(img)
         for j in faces:
             crop_faces.append(j)
             cv2.imwrite('anchors/'+self.person+str(count)+'.jpg', j)
+            print('yo')
             count = count + 1
     return crop_faces
 
