@@ -5,9 +5,10 @@ from align import AlignDlib
 from anchor import getAnchor
 import numpy as np
    
-raghav = getAnchor('raghav')
+raghav = getAnchor('surya')
 anchor_faces = raghav.getfaces('test-images/')
-myModel = FaceDetection(anchor_faces, 'raghav')
+myModel = FaceDetection(anchor_faces, 'surya/')
+
 
 
 frames = 0
@@ -34,6 +35,7 @@ while cap.isOpened():
       print("FPS of the video is {:5.2f}".format( frames / (time.time() - start)))
   else:
       break
+
 
 
 
