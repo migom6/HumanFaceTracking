@@ -5,9 +5,9 @@ from align import AlignDlib
 from anchor import getAnchor
 import numpy as np
    
-raghav = getAnchor('surya')
+raghav = getAnchor('ujala')
 anchor_faces = raghav.getfaces('test-images/')
-myModel = FaceDetection(anchor_faces, 'surya/')
+myModel = FaceDetection(anchor_faces, 'ujala/')
 
 
 

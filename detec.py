@@ -58,6 +58,7 @@ class FaceDetection:
             avg.append(k)
             if(k < 0.56):
                 print(chalk.green(self.name+" deteced"))
+            k = 1
         mx = 0
         mn = 0
         if(len(m) > 0 and len(m[0]) > 0):
