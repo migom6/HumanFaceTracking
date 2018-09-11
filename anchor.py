@@ -27,7 +27,7 @@ class getAnchor:
         for j in faces:
             crop_faces.append(j)
             cv2.imwrite('anchors/'+self.person+str(count)+'.jpg', j)
-            print('yo')
+            print('anchors/'+self.person+str(count)+'.jpg saved')
             count = count + 1
     return crop_faces
 
